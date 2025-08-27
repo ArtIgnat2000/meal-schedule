@@ -1,0 +1,267 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>График питания 2025-2026</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .header h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #1a365d;
+            margin: 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .decorations-top, .decorations-bottom {
+            position: absolute;
+            width: 100%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="0,0 100,0 50,100" fill="%23ff6b00"/><polygon points="0,0 50,100 0,100" fill="%2300bfa5"/><polygon points="100,0 50,100 100,100" fill="%23e63946"/><polygon points="0,0 100,0 100,100" fill="%233a0ca0"/></svg>') repeat;
+            transform: rotate(180deg);
+        }
+        .decorations-top {
+            top: 0;
+        }
+        .decorations-bottom {
+            bottom: 0;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: white;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #00bfa5;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9f7ef;
+        }
+        .highlight {
+            background-color: #00bfa5;
+            color: white;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .additional-info {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .title-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title-main {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        .title-year {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            color: #00bfa5;
+        }
+        .title-sub {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            .table-container {
+                padding: 10px;
+            }
+            th, td {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            .title-main, .title-year, .title-sub {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorations">
+            <div class="decorations-top"></div>
+            <div class="decorations-bottom"></div>
+        </div>
+        
+        <div class="header">
+            <h1>2025-2026</h1>
+        </div>
+
+        <div class="table-container">
+            <div class="title-container">
+                <div class="title-main">ГРАФИК ПИТАНИЯ В СТОЛОВОЙ-КАФЕ НА</div>
+                <div class="title-year">2025/2026</div>
+                <div class="title-sub">УЧЕБНЫЙ ГОД</div>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ВРЕМЯ</th>
+                        <th>КЛАССЫ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight">
+                        <td colspan="2">ЗАВТРАКИ</td>
+                    </tr>
+                    <tr>
+                        <td>09:10</td>
+                        <td>1А, 1Б, 1В, 1Г, 5, 6</td>
+                    </tr>
+                    <tr>
+                        <td>10:10</td>
+                        <td>3В, 3Г, 4А, 4Б, 4В, 4Г, 7, 8, 9</td>
+                    </tr>
+                    <tr>
+                        <td>11:00</td>
+                        <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td colspan="2">ОБЕДЫ</td>
+                    </tr>
+                    <tr>
+                        <td>12:00</td>
+                        <td>5-11</td>
+                    </tr>
+                    <tr>
+                        <td>12:50</td>
+                        <td>1А, 1Б, 1В, 1Г</td>
+                    </tr>
+                    <tr>
+                        <td>13:50</td>
+                        <td>3В, 3Г, 4А, 4Б, 4В, 4Г</td>
+                    </tr>
+                    <tr>
+                        <td>14:40</td>
+                        <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
+                    </tr>
+                    <tr>
+                        <td>12:00 – 14:00</td>
+                        <td>РАЗДАЧА СО СВОБОДНЫМ ВЫБОРОМ БЛЮД</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td colspan="2">ПОЛДНИК 1-4</td>
+                    </tr>
+                    <tr>
+                        <td>16:00</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="additional-info">
+                <p><strong>ВРЕМЯ РАБОТЫ КАФЕ:</strong> 09:00 – 16:00</p>
+                <p><strong>ВРЕМЯ КВАРЦЕВАНИЯ:</strong> 07:00 – 07:45 / 16:15 – 17:30</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025-2026 Школа</p>
+        </div>
+    </div>
+
+    <script>
+        // Add decorative triangles only in the header and footer areas
+        const container = document.querySelector('.container');
+        const triangleCount = 12;
+        const colors = ['#ff6b00', '#00bfa5', '#e63946', '#3a0ca0', '#ffcc00'];
+        
+        for (let i = 0; i < triangleCount; i++) {
+            const triangle = document.createElement('div');
+            triangle.className = 'triangle-decor';
+            triangle.style.position = 'absolute';
+            triangle.style.width = '0';
+            triangle.style.height = '0';
+            triangle.style.borderLeft = '30px solid transparent';
+            triangle.style.borderRight = '30px solid transparent';
+            triangle.style.borderBottom = '30px solid ' + colors[i % colors.length];
+            triangle.style.left = `${Math.random() * 100}%`;
+            triangle.style.top = `${Math.random() * 100}%`;
+            triangle.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            // Position triangles only in header and footer areas
+            if (i < 6) {
+                triangle.style.top = `${Math.random() * 150}px`;
+                triangle.style.zIndex = '-1';
+            } else {
+                triangle.style.bottom = `${Math.random() * 150}px`;
+                triangle.style.zIndex = '-1';
+            }
+            
+            container.appendChild(triangle);
+        }
+    </script>
+</body>
+</html>
+```
