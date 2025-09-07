@@ -1,267 +1,323 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>График питания 2025-2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .header h1 {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #1a365d;
-            margin: 0;
-            padding: 10px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .decorations {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            position: relative;
         }
-        .decorations-top, .decorations-bottom {
-            position: absolute;
-            width: 100%;
-            height: 150px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="0,0 100,0 50,100" fill="%23ff6b00"/><polygon points="0,0 50,100 0,100" fill="%2300bfa5"/><polygon points="100,0 50,100 100,100" fill="%23e63946"/><polygon points="0,0 100,0 100,100" fill="%233a0ca0"/></svg>') repeat;
-            transform: rotate(180deg);
-        }
-        .decorations-top {
-            top: 0;
-        }
-        .decorations-bottom {
-            bottom: 0;
-        }
-        .table-container {
-            overflow-x: auto;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            background-color: white;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #00bfa5;
+
+        .header {
+            background: linear-gradient(120deg, #1a365d 0%, #2c5282 100%);
             color: white;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #e9f7ef;
-        }
-        .highlight {
-            background-color: #00bfa5;
-            color: white;
-            font-weight: bold;
-        }
-        .footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #555;
+            padding: 30px 20px;
+            position: relative;
         }
-        .additional-info {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: #f2f2f2;
-            border-radius: 8px;
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .schedule-btn {
+            display: inline-block;
+            background: #00bfa5;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0, 191, 165, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
+
+        .schedule-btn:hover {
+            background: #00a690;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 191, 165, 0.4);
+        }
+
+        .schedule-btn i {
+            margin-right: 10px;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
         .title-container {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
+
         .title-main {
             font-size: 1.8rem;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
+            font-weight: 800;
+            color: #1a365d;
+            margin-bottom: 10px;
         }
-        .title-year {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            color: #00bfa5;
-        }
+
         .title-sub {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin: 0;
-            padding: 0;
-            text-align: center;
+            font-size: 1.3rem;
+            color: #00bfa5;
+            font-weight: 600;
         }
+
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        th {
+            background: linear-gradient(120deg, #00bfa5 0%, #009688 100%);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: #e8f5f6;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ff6b00 0%, #e63946 100%);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .additional-info {
+            background: linear-gradient(120deg, #4a6fa5 0%, #3a5a8a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .additional-info p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .additional-info i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a365d;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .decoration {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dec-1 {
+            top: -30px;
+            right: -30px;
+        }
+
+        .dec-2 {
+            bottom: -40px;
+            left: -40px;
+            width: 150px;
+            height: 150px;
+        }
+
         @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            .table-container {
+            body {
                 padding: 10px;
             }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .title-main {
+                font-size: 1.4rem;
+            }
+            
+            .title-sub {
+                font-size: 1.1rem;
+            }
+            
             th, td {
-                padding: 8px 10px;
+                padding: 12px 10px;
                 font-size: 0.9rem;
             }
-            .title-main, .title-year, .title-sub {
-                font-size: 1.4rem;
+            
+            .schedule-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="decorations">
-            <div class="decorations-top"></div>
-            <div class="decorations-bottom"></div>
-        </div>
-        
         <div class="header">
-            <h1>2025-2026</h1>
+            <div class="decoration dec-1"></div>
+            <div class="decoration dec-2"></div>
+            <h1>ГРАФИК ПИТАНИЯ</h1>
+            <p>2025/2026 УЧЕБНЫЙ ГОД</p>
+            <a href="https://artignat2000.github.io/schedule/" class="schedule-btn">
+                <i class="fas fa-calendar-alt"></i> Расписание уроков
+            </a>
         </div>
 
-        <div class="table-container">
+        <div class="content">
             <div class="title-container">
-                <div class="title-main">ГРАФИК ПИТАНИЯ В СТОЛОВОЙ-КАФЕ НА</div>
-                <div class="title-year">2025/2026</div>
-                <div class="title-sub">УЧЕБНЫЙ ГОД</div>
+                <div class="title-main">СТОЛОВАЯ-КАФЕ</div>
+                <div class="title-sub">ВРЕМЯ ПРИЕМА ПИЩИ</div>
             </div>
             
-            <table>
-                <thead>
-                    <tr>
-                        <th>ВРЕМЯ</th>
-                        <th>КЛАССЫ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="highlight">
-                        <td colspan="2">ЗАВТРАКИ</td>
-                    </tr>
-                    <tr>
-                        <td>09:10</td>
-                        <td>1А, 1Б, 1В, 1Г, 5, 6</td>
-                    </tr>
-                    <tr>
-                        <td>10:10</td>
-                        <td>3В, 3Г, 4А, 4Б, 4В, 4Г, 7, 8, 9</td>
-                    </tr>
-                    <tr>
-                        <td>11:00</td>
-                        <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
-                    </tr>
-                    <tr class="highlight">
-                        <td colspan="2">ОБЕДЫ</td>
-                    </tr>
-                    <tr>
-                        <td>12:00</td>
-                        <td>5-11</td>
-                    </tr>
-                    <tr>
-                        <td>12:50</td>
-                        <td>1А, 1Б, 1В, 1Г</td>
-                    </tr>
-                    <tr>
-                        <td>13:50</td>
-                        <td>3В, 3Г, 4А, 4Б, 4В, 4Г</td>
-                    </tr>
-                    <tr>
-                        <td>14:40</td>
-                        <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
-                    </tr>
-                    <tr>
-                        <td>12:00 – 14:00</td>
-                        <td>РАЗДАЧА СО СВОБОДНЫМ ВЫБОРОМ БЛЮД</td>
-                    </tr>
-                    <tr class="highlight">
-                        <td colspan="2">ПОЛДНИК 1-4</td>
-                    </tr>
-                    <tr>
-                        <td>16:00</td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ВРЕМЯ</th>
+                            <th>КЛАССЫ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="highlight">
+                            <td colspan="2">ЗАВТРАКИ</td>
+                        </tr>
+                        <tr>
+                            <td>09:10</td>
+                            <td>1А, 1Б, 1В, 1Г, 5, 6</td>
+                        </tr>
+                        <tr>
+                            <td>10:10</td>
+                            <td>3В, 3Г, 4А, 4Б, 4В, 4Г, 7, 8, 9</td>
+                        </tr>
+                        <tr>
+                            <td>11:00</td>
+                            <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td colspan="2">ОБЕДЫ</td>
+                        </tr>
+                        <tr>
+                            <td>12:00</td>
+                            <td>5-11</td>
+                        </tr>
+                        <tr>
+                            <td>12:50</td>
+                            <td>1А, 1Б, 1В, 1Г</td>
+                        </tr>
+                        <tr>
+                            <td>13:50</td>
+                            <td>3В, 3Г, 4А, 4Б, 4В, 4Г</td>
+                        </tr>
+                        <tr>
+                            <td>14:40</td>
+                            <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
+                        </tr>
+                        <tr>
+                            <td>12:00 – 14:00</td>
+                            <td>РАЗДАЧА СО СВОБОДНЫМ ВЫБОРОМ БЛЮД</td>
+                        </tr>
+                        <tr class="highlight">
+                            <td colspan="2">ПОЛДНИК 1-4</td>
+                        </tr>
+                        <tr>
+                            <td>16:00</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
             <div class="additional-info">
-                <p><strong>ВРЕМЯ РАБОТЫ КАФЕ:</strong> 09:00 – 16:00</p>
-                <p><strong>ВРЕМЯ КВАРЦЕВАНИЯ:</strong> 07:00 – 07:45 / 16:15 – 17:30</p>
+                <p><i class="fas fa-clock"></i> <strong>ВРЕМЯ РАБОТЫ КАФЕ:</strong> 09:00 – 16:00</p>
+                <p><i class="fas fa-shield-alt"></i> <strong>ВРЕМЯ КВАРЦЕВАНИЯ:</strong> 07:00 – 07:45 / 16:15 – 17:30</p>
             </div>
         </div>
 
         <div class="footer">
-            <p>© 2025-2026 Школа</p>
+            <p>© 2025-2026 Школа | Все права защищены</p>
         </div>
     </div>
-
-    <script>
-        // Add decorative triangles only in the header and footer areas
-        const container = document.querySelector('.container');
-        const triangleCount = 12;
-        const colors = ['#ff6b00', '#00bfa5', '#e63946', '#3a0ca0', '#ffcc00'];
-        
-        for (let i = 0; i < triangleCount; i++) {
-            const triangle = document.createElement('div');
-            triangle.className = 'triangle-decor';
-            triangle.style.position = 'absolute';
-            triangle.style.width = '0';
-            triangle.style.height = '0';
-            triangle.style.borderLeft = '30px solid transparent';
-            triangle.style.borderRight = '30px solid transparent';
-            triangle.style.borderBottom = '30px solid ' + colors[i % colors.length];
-            triangle.style.left = `${Math.random() * 100}%`;
-            triangle.style.top = `${Math.random() * 100}%`;
-            triangle.style.transform = `rotate(${Math.random() * 360}deg)`;
-            
-            // Position triangles only in header and footer areas
-            if (i < 6) {
-                triangle.style.top = `${Math.random() * 150}px`;
-                triangle.style.zIndex = '-1';
-            } else {
-                triangle.style.bottom = `${Math.random() * 150}px`;
-                triangle.style.zIndex = '-1';
-            }
-            
-            container.appendChild(triangle);
-        }
-    </script>
 </body>
 </html>
-```
