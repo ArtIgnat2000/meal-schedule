@@ -2,296 +2,265 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <title>📚 Расписание питания</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>График питания 2025-2026</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --header-bg: #87CEEB;
+            --header-border: #5F9EA0;
+            --primary-color: #4a90e2;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
+            /* Градиент неба от светло-голубого к более насыщенному */
+            background: linear-gradient(180deg, #B0E2FF 0%, #87CEEB 30%, #87CEEB 70%, #4A90E2 100%);
             color: #333;
-            line-height: 1.6;
-            padding: 20px;
+            margin: 0;
+            padding: 10px;
+            line-height: 1.5;
+            position: relative;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Стили для облаков */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            filter: blur(15px);
+            z-index: -1;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .cloud:nth-child(1) {
+            width: 120px;
+            height: 50px;
+            top: 8%;
+            left: 5%;
+            animation: float 25s infinite ease-in-out;
+        }
+
+        .cloud:nth-child(2) {
+            width: 180px;
+            height: 70px;
+            top: 20%;
+            right: 10%;
+            animation: float 30s infinite ease-in-out reverse;
+        }
+
+        .cloud:nth-child(3) {
+            width: 150px;
+            height: 60px;
+            bottom: 30%;
+            left: 15%;
+            animation: float 35s infinite ease-in-out;
+        }
+
+        .cloud:nth-child(4) {
+            width: 200px;
+            height: 80px;
+            top: 35%;
+            right: 20%;
+            animation: float 40s infinite ease-in-out reverse;
+        }
+
+        .cloud:nth-child(5) {
+            width: 100px;
+            height: 40px;
+            bottom: 15%;
+            right: 25%;
+            animation: float 28s infinite ease-in-out;
+        }
+
+        /* Анимация парения облаков */
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            25% {
+                transform: translate(10px, 15px);
+            }
+            50% {
+                transform: translate(20px, 0);
+            }
+            75% {
+                transform: translate(10px, -15px);
+            }
+        }
+
+        header {
+            text-align: center;
+            background-color: var(--header-bg);
+            color: white;
+            padding: 12px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            position: relative;
+            border: 2px solid var(--header-border);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .header {
-            background: linear-gradient(120deg, #1a365d 0%, #2c5282 100%);
-            color: white;
-            text-align: center;
-            padding: 15px 20px;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
-
-        .schedule-btn {
-            display: inline-block;
-            background: #00bfa5;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: 12px;
-            box-shadow: 0 3px 10px rgba(0, 191, 165, 0.3);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .schedule-btn:hover {
-            background: #00a690;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 191, 165, 0.4);
-        }
-
-        .schedule-btn i {
-            margin-right: 6px;
-        }
-
-        .content {
-            padding: 25px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-bottom: 25px;
+            background-color: white;
+            padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 10px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 10px;
+            font-size: 0.95rem;
+            text-align: left;
         }
 
         th {
-            background: linear-gradient(120deg, #00bfa5 0%, #009688 100%);
-            color: white;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 12px;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9rem;
-        }
-
-        tr:last-child td {
-            border-bottom: none;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        tr:hover {
-            background-color: #e8f5f6;
-            transform: scale(1.01);
-            transition: all 0.2s ease;
-        }
-
-        .highlight {
-            background: linear-gradient(120deg, #ff6b00 0%, #e63946 100%);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             font-weight: bold;
             text-align: center;
-            font-size: 1rem;
         }
 
-        .additional-info {
-            background: linear-gradient(120deg, #4a6fa5 0%, #3a5a8a 100%);
-            color: white;
+        tr:nth-child(even) {
+            background-color: #f0f4f8;
+        }
+
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        .meal-section {
+            background-color: #f8f9fa;
             padding: 15px;
-            border-radius: 12px;
-            margin-top: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--header-border);
         }
 
-        .additional-info p {
-            margin: 8px 0;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
+        .meal-section h2 {
+            margin-top: 0;
+            color: var(--header-border);
         }
 
-        .additional-info i {
-            margin-right: 8px;
-            font-size: 1rem;
-        }
-
-        .footer {
+        footer {
             text-align: center;
-            padding: 15px;
-            background: #1a365d;
-            color: white;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.85);
             font-size: 0.8rem;
+            padding: 8px;
+            border-radius: 8px;
         }
 
-        .decoration {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .dec-1 {
-            top: -20px;
-            right: -20px;
-        }
-
-        .dec-2 {
-            bottom: -30px;
-            left: -30px;
-            width: 120px;
-            height: 120px;
-        }
-
+        /* Адаптация для мобильных устройств */
         @media (max-width: 600px) {
             body {
-                padding: 10px;
+                padding: 8px;
             }
             
-            .header {
-                padding: 12px 15px;
+            header {
+                padding: 10px 8px;
             }
             
-            .header h1 {
-                font-size: 1.3rem;
+            h1 {
+                font-size: 1.5rem;
             }
             
-            .content {
-                padding: 15px;
+            .container {
+                padding: 12px;
             }
             
             th, td {
                 padding: 10px 8px;
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             
-            .schedule-btn {
-                padding: 8px 16px;
-                font-size: 0.8rem;
+            footer {
+                font-size: 0.75rem;
+                margin-top: 15px;
             }
-            
-            .additional-info {
-                padding: 12px;
-            }
-            
-            .additional-info p {
+        }
+
+        @media (max-width: 400px) {
+            th, td {
+                padding: 8px 6px;
                 font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Облака -->
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+
+    <header>
+        <h1>🍽️ Расписание питания</h1>
+    </header>
+
     <div class="container">
-        <div class="header">
-            <div class="decoration dec-1"></div>
-            <div class="decoration dec-2"></div>
-            <h1>ГРАФИК ПИТАНИЯ</h1>
-            <a href="https://artignat2000.github.io/schedule/" class="schedule-btn">
-                <i class="fas fa-calendar-alt"></i> Расписание уроков
-            </a>
+        <div class="meal-section">
+            <h2>ЗАВТРАКИ</h2>
+            <table>
+                <tr><th>ВРЕМЯ</th><th>КЛАССЫ</th></tr>
+                <tr><td>09:10</td><td>1А, 1Б, 1В, 1Г, 5, 6</td></tr>
+                <tr><td>10:10</td><td>3В, 3Г, 4А, 4Б, 4В, 4Г, 7, 8, 9</td></tr>
+                <tr><td>11:00</td><td>2А, 2Б, 2В, 2Г, 3А, 3Б</td></tr>
+            </table>
         </div>
 
-        <div class="content">
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ВРЕМЯ</th>
-                            <th>КЛАССЫ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="highlight">
-                            <td colspan="2">ЗАВТРАКИ</td>
-                        </tr>
-                        <tr>
-                            <td>09:10</td>
-                            <td>1А, 1Б, 1В, 1Г, 5, 6</td>
-                        </tr>
-                        <tr>
-                            <td>10:10</td>
-                            <td>3В, 3Г, 4А, 4Б, 4В, 4Г, 7, 8, 9</td>
-                        </tr>
-                        <tr>
-                            <td>11:00</td>
-                            <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
-                        </tr>
-                        <tr class="highlight">
-                            <td colspan="2">ОБЕДЫ</td>
-                        </tr>
-                        <tr>
-                            <td>12:00</td>
-                            <td>5-11</td>
-                        </tr>
-                        <tr>
-                            <td>12:50</td>
-                            <td>1А, 1Б, 1В, 1Г</td>
-                        </tr>
-                        <tr>
-                            <td>13:50</td>
-                            <td>3В, 3Г, 4А, 4Б, 4В, 4Г</td>
-                        </tr>
-                        <tr>
-                            <td>14:40</td>
-                            <td>2А, 2Б, 2В, 2Г, 3А, 3Б</td>
-                        </tr>
-                        <tr>
-                            <td>12:00 – 14:00</td>
-                            <td>РАЗДАЧА СО СВОБОДНЫМ ВЫБОРОМ БЛЮД</td>
-                        </tr>
-                        <tr class="highlight">
-                            <td colspan="2">ПОЛДНИК 1-4</td>
-                        </tr>
-                        <tr>
-                            <td>16:00</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="additional-info">
-                <p><i class="fas fa-clock"></i> <strong>ВРЕМЯ РАБОТЫ КАФЕ:</strong> 09:00 – 16:00</p>
-                <p><i class="fas fa-shield-alt"></i> <strong>ВРЕМЯ КВАРЦЕВАНИЯ:</strong> 07:00 – 07:45 / 16:15 – 17:30</p>
-            </div>
+        <div class="meal-section">
+            <h2>ОБЕДЫ</h2>
+            <table>
+                <tr><th>ВРЕМЯ</th><th>КЛАССЫ</th></tr>
+                <tr><td>12:00</td><td>5-11</td></tr>
+                <tr><td>12:50</td><td>1А, 1Б, 1В, 1Г</td></tr>
+                <tr><td>13:50</td><td>3В, 3Г, 4А, 4Б, 4В, 4Г</td></tr>
+                <tr><td>14:40</td><td>2А, 2Б, 2В, 2Г, 3А, 3Б</td></tr>
+                <tr><td>12:00 – 14:00</td><td>РАЗДАЧА СО СВОБОДНЫМ ВЫБОРОМ БЛЮД</td></tr>
+            </table>
         </div>
 
-        <div class="footer">
-            <p>© 2025-2026 Школа | Все права защищены</p>
+        <div class="meal-section">
+            <h2>ПОЛДНИК 1-4</h2>
+            <table>
+                <tr><th>ВРЕМЯ</th><th>КЛАССЫ</th></tr>
+                <tr><td>16:00</td><td>Все классы 1-4</td></tr>
+            </table>
+        </div>
+
+        <div class="meal-section">
+            <h2>ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ</h2>
+            <p><strong>ВРЕМЯ РАБОТЫ КАФЕ:</strong> 09:00 – 16:00</p>
+            <p><strong>ВРЕМЯ КВАРЦЕВАНИЯ:</strong> 07:00 – 07:45 / 16:15 – 17:30</p>
         </div>
     </div>
+
+    <footer>
+        &copy; 2025
+    </footer>
 </body>
 </html>
